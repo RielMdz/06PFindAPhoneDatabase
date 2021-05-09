@@ -43,3 +43,9 @@ except sqlite3.OperationalError as err:
     conn = sqlite3.connect('phones.db')
     cur = conn.cursor()
     print ("good")
+
+
+
+cur.execute("SELECT * FROM phoneTable WHERE id = '1'")
+print(cur.fetchall())
+print("here")
