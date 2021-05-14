@@ -18,7 +18,6 @@ class phoneClass(object):
                 self.listAll()
             elif userChoice == 4:
                 self.advanceSearch()
-                
             userChoice = programMenu.mainMenu()
 
     def searchBySpecs(self):
@@ -53,6 +52,10 @@ class phoneClass(object):
     def listAll(self):
         cur.execute("SELECT * FROM phoneTable")
         result = cur.fetchall()
+        pd.set_option('display.max_rows', None)
+        pd.set_option('display.max_columns', None)
+        pd.set_option('display.width', None)
+        pd.set_option('display.max_colwidth', None)
         dl1 = pd.read_sql_query("SELECT * FROM phoneTable",conn)
         print(dl1)
    
@@ -61,7 +64,6 @@ class phoneClass(object):
         searchId = input("ID of Phone: ")
         dl1 = pd.read_sql_query("SELECT * FROM phoneTable WHERE id = '{}'".format(searchId),conn)
         print (dl1)
-    
 
     
     def searchDualSim(self):
@@ -164,7 +166,6 @@ class phoneClass(object):
 try:
     conn = sqlite3.connect('phones.db', uri=True)
     cur = conn.cursor()
-# gawa ng table tangalin if wala
     cur.execute("""CREATE TABLE phoneTable(
         id TEXT,
         battery_power INTEGER,
